@@ -18,6 +18,8 @@ part '_impl/_focus_date.dart';
 part '_impl/_month_picker.dart';
 part '_impl/year_picker.dart';
 
+typedef CalendarModeChanger = CalendarDatePicker2Mode Function(CalendarDatePicker2Mode mode);
+
 const Duration _monthScrollDuration = Duration(milliseconds: 200);
 
 const double _dayPickerRowHeight = 42.0;
@@ -70,7 +72,7 @@ class CalendarDatePicker2 extends StatefulWidget {
     }
   }
 
-  static void _defaultModeChange(CalendarDatePicker2Mode mode) => CalendarDatePicker2Mode.day;
+  static CalendarDatePicker2Mode _defaultModeChange(CalendarDatePicker2Mode mode) => CalendarDatePicker2Mode.day;
 
   /// The calendar UI related configurations
   final CalendarDatePicker2Config config;
@@ -86,7 +88,7 @@ class CalendarDatePicker2 extends StatefulWidget {
 
   /// Called to update the CalendarDatePicker2Mode after selecting a month or yerar.
   /// By defalt it always cahnge to CalendarDatePicker2Mode.day
-  final ValueChanged<CalendarDatePicker2Mode> onModeChange;
+  final CalendarModeChanger onModeChange;
 
   /// Called when the displayed month changed
   final ValueChanged<DateTime>? onDisplayedMonthChanged;
