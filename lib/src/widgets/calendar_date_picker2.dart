@@ -44,6 +44,7 @@ class CalendarDatePicker2 extends StatefulWidget {
     this.onValueChanged,
     this.displayedMonthDate,
     this.onDisplayedMonthChanged,
+    this.onModeChange = _defaultModeChange,
     Key? key,
   }) : super(key: key) {
     const valid = true;
@@ -69,6 +70,8 @@ class CalendarDatePicker2 extends StatefulWidget {
     }
   }
 
+  static void _defaultModeChange(CalendarDatePicker2Mode mode) => CalendarDatePicker2Mode.day;
+
   /// The calendar UI related configurations
   final CalendarDatePicker2Config config;
 
@@ -80,6 +83,10 @@ class CalendarDatePicker2 extends StatefulWidget {
 
   /// Date to control calendar displayed month
   final DateTime? displayedMonthDate;
+
+  /// Called to update the CalendarDatePicker2Mode after selecting a month or yerar.
+  /// By defalt it always cahnge to CalendarDatePicker2Mode.day
+  final ValueChanged<CalendarDatePicker2Mode> onModeChange;
 
   /// Called when the displayed month changed
   final ValueChanged<DateTime>? onDisplayedMonthChanged;
@@ -231,7 +238,7 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
   void _handleMonthChanged(DateTime value) {
     _vibrate();
     setState(() {
-      _mode = CalendarDatePicker2Mode.day;
+      _mode = widget.onModeChange(_mode);
       _handleDisplayedMonthDateChanged(value);
     });
   }
@@ -246,7 +253,7 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
     }
 
     setState(() {
-      _mode = CalendarDatePicker2Mode.day;
+      _mode = widget.onModeChange(_mode);
       _handleDisplayedMonthDateChanged(value, fromYearPicker: true);
     });
   }
