@@ -10,6 +10,7 @@ class CalendarDatePicker2WithActionButtons extends StatefulWidget {
     this.onDisplayedMonthChanged,
     this.onCancelTapped,
     this.onOkTapped,
+    this.onModeChange = CalendarDatePicker2.defaultModeChange,
     Key? key,
   }) : super(key: key) {
     if (config.calendarViewMode == CalendarDatePicker2Mode.scroll) {
@@ -31,6 +32,10 @@ class CalendarDatePicker2WithActionButtons extends StatefulWidget {
 
   /// The calendar configurations including action buttons
   final CalendarDatePicker2WithActionButtonsConfig config;
+
+  /// Called to update the CalendarDatePicker2Mode after selecting a month or yerar.
+  /// By defalt it always cahnge to CalendarDatePicker2Mode.day
+  final CalendarModeChanger onModeChange;
 
   /// The callback when cancel button is tapped
   final Function? onCancelTapped;
@@ -93,6 +98,7 @@ class _CalendarDatePicker2WithActionButtonsState
             config: widget.config,
             onValueChanged: (values) => _editCache = values,
             onDisplayedMonthChanged: widget.onDisplayedMonthChanged,
+            onModeChange: widget.onModeChange,
           ),
         ),
         SizedBox(height: widget.config.gapBetweenCalendarAndButtons ?? 10),

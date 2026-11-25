@@ -46,7 +46,7 @@ class CalendarDatePicker2 extends StatefulWidget {
     this.onValueChanged,
     this.displayedMonthDate,
     this.onDisplayedMonthChanged,
-    this.onModeChange = _defaultModeChange,
+    this.onModeChange = defaultModeChange,
     Key? key,
   }) : super(key: key) {
     const valid = true;
@@ -72,7 +72,7 @@ class CalendarDatePicker2 extends StatefulWidget {
     }
   }
 
-  static CalendarDatePicker2Mode _defaultModeChange(CalendarDatePicker2Mode mode) => CalendarDatePicker2Mode.day;
+  static CalendarDatePicker2Mode defaultModeChange(CalendarDatePicker2Mode mode) => CalendarDatePicker2Mode.day;
 
   /// The calendar UI related configurations
   final CalendarDatePicker2Config config;
